@@ -1,7 +1,18 @@
+let ballsToRemove = 0
+
+
 window.onload = function(){
-    const selector = document.getElementById("balls-selector")
-    console.log("selector: ", selector)
-    selector.addEventListener("change", () =>{
-        console.log("Option selected: ", selector.value)
+    const ballsSelector = document.getElementById("balls-selector")
+    ballsSelector.addEventListener("change", () =>{
+        ballsToRemove = Number(selector.value)
+    }) 
+
+    document.querySelector('.play-button').addEventListener("click", () =>{
+        console.log(play)
     })
+    
+}
+
+function drawBalls(){
+
 }
