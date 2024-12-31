@@ -1,3 +1,50 @@
 body {
     margin: 0px;
+    padding: 0;
+    background: #87CEEB;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.game-main-frame{ 
+    width: 50%;
+    height: 50%;
+    border-radius: 20px;
+    display: flex;
+}
+
+.primary-color{
+    background: white;
+}
+
+.stopwatch-block{
+    position: absolute;
+    top: 20px;
+    width: 14%;
+    height: 5%;
+    align-content: center;
+    border-radius: 8px;
+}
+
+.stopwatch{
+    text-align: center;
+    font-size: 30px;
+}
+
+
+
+/* Shadow scheme */
+/* 
+    (x-axys y-axys blurred-intensity color),
+    (same as above for multiple elements),
+*/
+
+.box-shadow{
+    box-shadow: 10px 5px 7px rgba(58, 58, 58, 0.5),
+    0px -5px 7px rgba(53, 52, 52, 0.5),
+    -10px 0px 7px rgba(58, 58, 58, 0.5);
+}
+
