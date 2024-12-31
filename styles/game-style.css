@@ -14,6 +14,9 @@ body {
     height: 50%;
     border-radius: 20px;
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .primary-color{
@@ -34,6 +37,24 @@ body {
     font-size: 30px;
 }
 
+.selector-block{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+}
+
+.mode-block{
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mode-options{
+    display: flex;
+    gap: 6px;
+}
 
 
 /* Shadow scheme */

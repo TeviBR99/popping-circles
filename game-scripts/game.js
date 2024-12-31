@@ -1,3 +1,7 @@
 window.onload = function(){
-    console.log("Everything is working fine")
+    const selector = document.getElementById("balls-selector")
+    console.log("selector: ", selector)
+    selector.addEventListener("change", () =>{
+        console.log("Option selected: ", selector.value)
+    })
 }
