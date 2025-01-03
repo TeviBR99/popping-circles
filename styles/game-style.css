@@ -24,7 +24,8 @@ body {
 }
 
 .stopwatch-block{
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     top: 20px;
     width: 14%;
     height: 5%;
