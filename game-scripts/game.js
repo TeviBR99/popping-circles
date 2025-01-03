@@ -19,7 +19,7 @@ window.onload = function(){
         buttonRemoveOneColor.disabled = true
     })
 
-    document.querySelector('.play-button').addEventListener("click", () =>{
+    document.getElementById('play-button').addEventListener("click", () =>{
         console.log('play')
         if(buttonRemoveAllColors.disabled){
             buttonRemoveAllColors.disabled = false
@@ -28,10 +28,13 @@ window.onload = function(){
         if(buttonRemoveOneColor.disabled){
             buttonRemoveOneColor.disabled = false
         }
+        document.getElementById("game-options").style.display = 'none'
+
+        drawBalls()
     })
     
 }
 
 function drawBalls(){
-
+    
 }
