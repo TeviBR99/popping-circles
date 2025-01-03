@@ -2,9 +2,15 @@ let ballsToRemove = 0
 let clockIsTicking = true
 const TIME_INTERVAL_IN_SECONDS = 1
 let timerInterval
+let availableWidth
+let availableHeight
 
 window.onload = function(){
     document.querySelector('.stopwatch').innerHTML = '00:00'
+
+    availableWidth = window.screen.availWidth;
+    availableHeight = window.screen.availHeight;
+
     const ballsSelector = document.getElementById("balls-selector")
     const buttonRemoveAllColors = document.getElementById('button-remove-all-colors')
     const buttonRemoveOneColor = document.getElementById('button-remove-one-color')
@@ -31,6 +37,7 @@ window.onload = function(){
             buttonRemoveOneColor.disabled = false
         }
         document.getElementById("game-options").style.display = 'none'
+        document.getElementById("game-board").style.display = 'block'
         startStopWatch()
         drawBubbles()
     })
@@ -66,6 +73,9 @@ function drawBubbles(){
     }
 }
 
-function getRandomNumber(maxWidth){
-    return Math.floor(Math.random() * maxWidth) + 1;
+function getRandomNumber(maxNumberInterval){
+    //Math.random() * (max - min + 1)
+    const max = maxNumberInterval
+    const min = -maxNumberInterval
+    return Math.floor(Math.random() * (max - min + 1));
 }
