@@ -22,11 +22,11 @@ window.onload = function(){
     }) 
 
     buttonRemoveOneColor.addEventListener("click", () =>{
-        buttonRemoveAllColors.disabled = true
+        disableEnableButton(buttonRemoveAllColors)
     })
 
     buttonRemoveAllColors.addEventListener("click", () =>{
-        buttonRemoveOneColor.disabled = true
+        disableEnableButton(buttonRemoveOneColor)
     })
 
     document.getElementById('play-button').addEventListener("click", () =>{
@@ -42,6 +42,10 @@ window.onload = function(){
         startStopWatch()
         drawBubbles()
     })
+}
+
+function disableEnableButton(button){
+    button.disabled = !button.disabled
 }
 
 function startStopWatch(){
@@ -80,3 +84,4 @@ function getRandomNumber(maxNumberInterval, minNumberInterval){
     const min = minNumberInterval ? minNumberInterval : 0
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
