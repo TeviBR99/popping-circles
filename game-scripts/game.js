@@ -7,11 +7,10 @@ let windowHeight
 
 window.onload = function(){
     document.querySelector('.stopwatch').innerHTML = '00:00'
-    console.log("Window: ", window)
-    // windowWidth = window.innerWidth;
+    console.log(window)
+    // windowWidth = 1300;
+    windowWidth = 1200;
     windowHeight = window.innerHeight;
-    windowWidth = 1230;
-    // windowHeight = 800;
 
     const ballsSelector = document.getElementById("balls-selector")
     const buttonRemoveAllColors = document.getElementById('button-remove-all-colors')
@@ -43,7 +42,6 @@ window.onload = function(){
         startStopWatch()
         drawBubbles()
     })
-    
 }
 
 function startStopWatch(){
@@ -60,7 +58,6 @@ function startStopWatch(){
 }
 
 function drawBubbles(){
-    console.log("GameBoard: ", document.getElementById('game-board'))
     for(let i=0; i<ballsToRemove; i++){
         const xAxysPx = getRandomNumber(windowWidth)
         const yAxysPx = getRandomNumber(windowHeight)
@@ -68,6 +65,7 @@ function drawBubbles(){
         const bubbleDiv = document.createElement('div')
         
         bubbleDiv.classList.add('red-bubble')
+        bubbleDiv.classList.add('box-shadow')
         const size = getRandomNumber(100, 30)
         bubbleDiv.style.width = size
         bubbleDiv.style.height = size
@@ -78,7 +76,6 @@ function drawBubbles(){
 }
 
 function getRandomNumber(maxNumberInterval, minNumberInterval){
-    //Math.random() * (max - min + 1) + min
     const max = maxNumberInterval
     const min = minNumberInterval ? minNumberInterval : 0
     return Math.floor(Math.random() * (max - min + 1)) + min;
