@@ -57,6 +57,20 @@ body {
     gap: 6px;
 }
 
+.hide-elements{
+    display: none;
+}
+
+#game-board{
+    position: relative;
+    top: 46px;
+    width: 95%;
+    height: 85%;
+    background: white;
+    overflow: scroll;
+    border-radius: 15px;
+    scrollbar-width: none;
+}
 
 /* Shadow scheme */
 /* 
@@ -70,18 +84,15 @@ body {
     -10px 0px 7px rgba(58, 58, 58, 0.5);
 }
 
-#game-board{
-    display: none;
-    /* add a padding? */
-    /* width: 70%;
-    height: 100px; */
-}
-
 /* Bubbles */
 
 .red-bubble{
     position: absolute;
     background: red;
     border-radius: 100%;
+}
+
+.easy-mode{
+    z-index: 1;
 }
 

@@ -2,14 +2,16 @@ let ballsToRemove = 0
 let clockIsTicking = true
 const TIME_INTERVAL_IN_SECONDS = 1
 let timerInterval
-let availableWidth
-let availableHeight
+let windowWidth
+let windowHeight
 
 window.onload = function(){
     document.querySelector('.stopwatch').innerHTML = '00:00'
-
-    availableWidth = window.screen.availWidth;
-    availableHeight = window.screen.availHeight;
+    console.log("Window: ", window)
+    // windowWidth = window.innerWidth;
+    windowHeight = window.innerHeight;
+    windowWidth = 1230;
+    // windowHeight = 800;
 
     const ballsSelector = document.getElementById("balls-selector")
     const buttonRemoveAllColors = document.getElementById('button-remove-all-colors')
@@ -58,24 +60,26 @@ function startStopWatch(){
 }
 
 function drawBubbles(){
+    console.log("GameBoard: ", document.getElementById('game-board'))
     for(let i=0; i<ballsToRemove; i++){
-        const xAxysPx = getRandomNumber(800)
-        const yAxysPx = getRandomNumber(800)
+        const xAxysPx = getRandomNumber(windowWidth)
+        const yAxysPx = getRandomNumber(windowHeight)
         const gameBoard = document.getElementById('game-board')
         const bubbleDiv = document.createElement('div')
-
+        
         bubbleDiv.classList.add('red-bubble')
-        bubbleDiv.style.width = 20
-        bubbleDiv.style.height = 30
+        const size = getRandomNumber(100, 30)
+        bubbleDiv.style.width = size
+        bubbleDiv.style.height = size
         bubbleDiv.style.transform = `translate(${xAxysPx}px, ${yAxysPx}px)`
-    
+
         gameBoard.appendChild(bubbleDiv)
     }
 }
 
-function getRandomNumber(maxNumberInterval){
-    //Math.random() * (max - min + 1)
+function getRandomNumber(maxNumberInterval, minNumberInterval){
+    //Math.random() * (max - min + 1) + min
     const max = maxNumberInterval
-    const min = -maxNumberInterval
-    return Math.floor(Math.random() * (max - min + 1));
+    const min = minNumberInterval ? minNumberInterval : 0
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
