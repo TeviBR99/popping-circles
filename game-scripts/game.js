@@ -4,7 +4,7 @@ const TIME_INTERVAL_IN_SECONDS = 1
 
 let ballsToRemove = 0
 let gameMode = ""
-let gameDifficulty = ""
+let gameDifficulty = "no-difficulty-assigned"
 let clockIsTicking = true
 let timerInterval
 let windowWidth
@@ -99,6 +99,8 @@ function drawBubbles(){
         const size = getRandomNumber(100, 30)   
         bubbleDiv.style.width = size
         bubbleDiv.style.height = size
+
+        poppingBubble(bubbleDiv)     
         
         document.getElementById('game-board').appendChild(bubbleDiv)
     }
@@ -110,11 +112,21 @@ function getRandomNumber(maxNumberInterval, minNumberInterval){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function poppingBubble(bubbleDiv){
+    bubbleDiv.addEventListener("click", () =>{
+        console.log("Click: ", bubbleDiv)
+        bubbleDiv.remove();
+    })
+}
+
 function drawBubbleColor(bubbleDiv, index){
+    const lessThanHalfBallsNumber = index < ballsToRemove/2
     if(gameMode.includes('One')){
-        const bubbleColorClassName = index < ballsToRemove/2 ? `${colorSelected}` : `${COLORS[getRandomNumber(COLORS.length-1)]}-bubble`
+        const bubbleColorClassName = lessThanHalfBallsNumber ? `${colorSelected}` : `${COLORS[getRandomNumber(COLORS.length-1)]}-bubble`
         bubbleDiv.classList.add(bubbleColorClassName)
-        //If gameDifficult is easy, we use z-index = 1 in the color of colorSelected
+        if(lessThanHalfBallsNumber && gameDifficulty.toLowerCase() === "easy"){
+            bubbleDiv.style.zIndex = 1
+        }
     }else{
         bubbleDiv.classList.add(`${colorSelected}`)
     }
