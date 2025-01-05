@@ -142,21 +142,38 @@ function checkGameStatus(){
     const dialogGameFinished = document.getElementById('dialog-game-finished')
     if(gameMode.includes("One")){
         if(colorSelected.includes("green") && countGreenBubblesPopped === numberBallsColorSelected){
+            clockIsTicking = false
+            displayFinalResults()
             openDialog(dialogGameFinished)
         }
     
         if(colorSelected.includes("red") && countRedBubblesPopped === numberBallsColorSelected){
+            clockIsTicking = false
+            displayFinalResults()
             openDialog(dialogGameFinished)
         }
     
         if(colorSelected.includes("blue") && countBlueBubblesPopped === numberBallsColorSelected){
+            clockIsTicking = false
+            displayFinalResults()
             openDialog(dialogGameFinished)
         }
     }else{
         if(totalCount === ballsToRemove){
-            openDialog(dialogGameFinished)
+            clockIsTicking = false
+            displayFinalResults()
+            openDialog(dialogGameFinished)         
         }
     }  
+}
+
+function displayFinalResults(){
+    let finalInfo = ""
+    finalInfo += `Time info: ${timeIsUp}`
+    finalInfo += `<p><span style="color: green;">Green</span> bubbles popped: ${countGreenBubblesPopped}</p>`
+    finalInfo += `<p><span style="color: red;">Red</span> bubbles popped: ${countRedBubblesPopped}</p>`
+    finalInfo += `<p><span style="color: blue;">Blue</span> bubbles popped: ${countBlueBubblesPopped}</p>`
+    document.getElementById("display-finished-results").innerHTML = finalInfo
 }
 
 function displayCurrentGameStatus(){
