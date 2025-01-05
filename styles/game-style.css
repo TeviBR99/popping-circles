@@ -17,6 +17,7 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    font-size: 30px;
 }
 
 .primary-color{
@@ -57,7 +58,7 @@ body {
 }
 
 .hide-elements{
-    display: none;
+    display: none !important;
 }
 
 #game-board{
@@ -69,6 +70,11 @@ body {
     overflow: scroll;
     border-radius: 15px;
     scrollbar-width: none;
+}
+
+#chosen-color{
+    display: flex;
+    flex-direction: column;
 }
 
 /* Shadow scheme */
@@ -85,9 +91,20 @@ body {
 
 /* Bubbles */
 
-.red-bubble{
+.bubble{
     position: absolute;
-    background: red;
     border-radius: 100%;
+}
+
+.red-bubble{
+    background: red;
+}
+
+.green-bubble{
+    background: green;
+}
+
+.blue-bubble{
+    background: blue;
 }
 

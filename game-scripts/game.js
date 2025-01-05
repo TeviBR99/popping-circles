@@ -1,44 +1,54 @@
-let ballsToRemove = 0
-let clockIsTicking = true
+const COLORS = ['green', 'red', 'blue']
+const HIDE_ELEMENTS_CLASSNAME = 'hide-elements'
 const TIME_INTERVAL_IN_SECONDS = 1
+
+let ballsToRemove = 0
+let gameMode = ""
+let clockIsTicking = true
 let timerInterval
 let windowWidth
 let windowHeight
+let colorSelected
+
 
 window.onload = function(){
     document.querySelector('.stopwatch').innerHTML = '00:00'
-    console.log(window)
-    // windowWidth = 1300;
     windowWidth = 1200;
     windowHeight = window.innerHeight;
 
     const ballsSelector = document.getElementById("balls-selector")
     const buttonRemoveAllColors = document.getElementById('button-remove-all-colors')
     const buttonRemoveOneColor = document.getElementById('button-remove-one-color')
+    const dialog = document.getElementById('dialog-confirm-selection')
 
     ballsSelector.addEventListener("change", () =>{
         ballsToRemove = Number(ballsSelector.value)
-        console.log(ballsToRemove)
+        if( (!buttonRemoveAllColors.disabled && buttonRemoveOneColor.disabled) || (buttonRemoveAllColors.disabled && !buttonRemoveOneColor.disabled) ){
+            openDialog(dialog)
+        }
     }) 
 
     buttonRemoveOneColor.addEventListener("click", () =>{
         disableEnableButton(buttonRemoveAllColors)
+        if(buttonRemoveAllColors.disabled && ballsToRemove > 0){
+            openDialog(dialog)
+        }
     })
 
     buttonRemoveAllColors.addEventListener("click", () =>{
         disableEnableButton(buttonRemoveOneColor)
+        if(buttonRemoveOneColor.disabled && ballsToRemove > 0){
+            openDialog(dialog)
+        }
     })
 
     document.getElementById('play-button').addEventListener("click", () =>{
-        if(buttonRemoveAllColors.disabled){
-            buttonRemoveAllColors.disabled = false
-        }
+        const chosenColorId = "chosen-color"
+        addClass(chosenColorId, HIDE_ELEMENTS_CLASSNAME)
 
-        if(buttonRemoveOneColor.disabled){
-            buttonRemoveOneColor.disabled = false
-        }
-        document.getElementById("game-options").style.display = 'none'
-        document.getElementById("game-board").style.display = 'block'
+        const gameBoardId = "game-board"
+        removeClass(gameBoardId, HIDE_ELEMENTS_CLASSNAME)
+
         startStopWatch()
         drawBubbles()
     })
@@ -63,19 +73,21 @@ function startStopWatch(){
 
 function drawBubbles(){
     for(let i=0; i<ballsToRemove; i++){
+        const bubbleDiv = document.createElement('div')
+
         const xAxysPx = getRandomNumber(windowWidth)
         const yAxysPx = getRandomNumber(windowHeight)
-        const gameBoard = document.getElementById('game-board')
-        const bubbleDiv = document.createElement('div')
+        bubbleDiv.style.transform = `translate(${xAxysPx}px, ${yAxysPx}px)`
         
+        bubbleDiv.classList.add('bubble')
         bubbleDiv.classList.add('red-bubble')
-        bubbleDiv.classList.add('box-shadow')
-        const size = getRandomNumber(100, 30)
+        bubbleDiv.classList.add('box-shadow')  
+
+        const size = getRandomNumber(100, 30)   
         bubbleDiv.style.width = size
         bubbleDiv.style.height = size
-        bubbleDiv.style.transform = `translate(${xAxysPx}px, ${yAxysPx}px)`
-
-        gameBoard.appendChild(bubbleDiv)
+        
+        document.getElementById('game-board').appendChild(bubbleDiv)
     }
 }
 
@@ -84,4 +96,44 @@ function getRandomNumber(maxNumberInterval, minNumberInterval){
     const min = minNumberInterval ? minNumberInterval : 0
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function openDialog(dialog){
+    dialog.showModal()
+    document.getElementById('yes-btn').addEventListener("click", () =>{
+        const gameOptionsId = "game-options"
+        addClass(gameOptionsId, HIDE_ELEMENTS_CLASSNAME)
+
+        const chosenColorId = "chosen-color"
+        removeClass(chosenColorId, HIDE_ELEMENTS_CLASSNAME)
+
+        const bubbleColorChosenId = "buble-color-chosen-random"
+        addClass(bubbleColorChosenId, `${COLORS[getRandomNumber(COLORS.length-1)]}-bubble`)
+        
+        const bubbleElementToDisplayColor = document.getElementById(bubbleColorChosenId)
+        bubbleElementToDisplayColor.style.width = 200
+        bubbleElementToDisplayColor.style.height = 200
+        bubbleElementToDisplayColor.style.position = 'static'
+
+        dialog.close()
+    })
+
+    document.getElementById('go-to-settings-btn').addEventListener("click", () =>{
+        dialog.close()
+    })
+}
+
+function removeClass(id, className){
+    const element = document.getElementById(id)
+    if(element && element.classList.contains(className)){
+        element.classList.remove(className)
+    }
+}
+
+function addClass(id, className){
+    const element = document.getElementById(id)
+    if(element && !element.classList.contains(className)){
+        element.classList.add(className)
+    }
+}
+
 
