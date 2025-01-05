@@ -9,6 +9,7 @@ let timerInterval
 let windowWidth
 let windowHeight
 let colorClassNameSelected
+let timeIsUp
 
 window.onload = function(){
     document.querySelector('.stopwatch').innerHTML = '00:00'
@@ -65,7 +66,9 @@ function startStopWatch(){
         if(clockIsTicking){
             minutes = seconds === 59 ? minutes + 1 : minutes + 0
             seconds = seconds === 59 ? 0 : seconds + 1
-            document.querySelector('.stopwatch').innerHTML = `${addZero(minutes)}${minutes}:${addZero(seconds)}${seconds}`
+            let timeIsTicking = `${addZero(minutes)}${minutes}:${addZero(seconds)}${seconds}`
+            timeIsUp = timeIsTicking
+            document.querySelector('.stopwatch').innerHTML = `${timeIsTicking}`
         }
     }, TIME_INTERVAL_IN_SECONDS * 1000);
 }
