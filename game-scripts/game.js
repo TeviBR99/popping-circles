@@ -8,7 +8,8 @@ let clockIsTicking = true
 let timerInterval
 let windowWidth
 let windowHeight
-let colorClassNameSelected
+let colorSelected
+let positionColorSelected
 let timeIsUp
 
 window.onload = function(){
@@ -35,6 +36,7 @@ function settingsParametersToPlay(){
     buttonRemoveOneColor.addEventListener("click", () =>{
         disableEnableButton(buttonRemoveAllColors)
         if(buttonRemoveAllColors.disabled && ballsToRemove > 0){
+            gameMode = "Remove One Color"
             openDialog(dialog)
         }
     })
@@ -42,6 +44,7 @@ function settingsParametersToPlay(){
     buttonRemoveAllColors.addEventListener("click", () =>{
         disableEnableButton(buttonRemoveOneColor)
         if(buttonRemoveOneColor.disabled && ballsToRemove > 0){
+            gameMode = "Remove All Colors"
             openDialog(dialog)
         }
     })
@@ -88,8 +91,9 @@ function drawBubbles(){
         bubbleDiv.style.transform = `translate(${xAxysPx}px, ${yAxysPx}px)`
         
         bubbleDiv.classList.add('bubble')
-        bubbleDiv.classList.add(`${colorSelected}`)
-        bubbleDiv.classList.add('box-shadow')  
+        bubbleDiv.classList.add('box-shadow')
+
+        drawBubbleColor(bubbleDiv, i)
 
         const size = getRandomNumber(100, 30)   
         bubbleDiv.style.width = size
@@ -103,6 +107,15 @@ function getRandomNumber(maxNumberInterval, minNumberInterval){
     const max = maxNumberInterval
     const min = minNumberInterval ? minNumberInterval : 0
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function drawBubbleColor(bubbleDiv, index){
+    if(gameMode.includes('One')){
+        const bubbleColorClassName = index < ballsToRemove/2 ? `${colorSelected}` : `${COLORS[getRandomNumber(COLORS.length-1)]}-bubble`
+        bubbleDiv.classList.add(bubbleColorClassName)
+    }else{
+        bubbleDiv.classList.add(`${colorSelected}`)
+    }
 }
 
 function openDialog(dialog){
