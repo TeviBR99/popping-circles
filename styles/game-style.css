@@ -100,11 +100,28 @@ body {
     background: red;
 }
 
+.red-bubble:hover{
+    background: rgb(247, 124, 124);
+    cursor: pointer;
+}
+
 .green-bubble{
     background: green;
+}
+
+.green-bubble:hover{
+    background: rgb(156, 248, 156);
+    cursor: pointer;
 }
 
 .blue-bubble{
     background: blue;
 }
+
+.blue-bubble:hover{
+    background: rgb(64, 64, 236);
+    cursor: pointer;
+}
+
+
 

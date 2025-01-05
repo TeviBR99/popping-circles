@@ -114,9 +114,10 @@ function openDialog(dialog){
         const chosenColorId = "chosen-color"
         removeClass(chosenColorId, HIDE_ELEMENTS_CLASSNAME)
 
+        const randomColor = COLORS[getRandomNumber(COLORS.length-1)]
         const bubbleColorChosenId = "buble-color-chosen-random"
-        colorSelected = `${COLORS[getRandomNumber(COLORS.length-1)]}-bubble`
-        addClass(bubbleColorChosenId, `${colorSelected}`)
+        colorSelected = `${randomColor}-bubble`
+        document.getElementById(bubbleColorChosenId).style.background = randomColor
         
         const bubbleElementToDisplayColor = document.getElementById(bubbleColorChosenId)
         bubbleElementToDisplayColor.style.width = 200
