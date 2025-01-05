@@ -26,7 +26,7 @@ body {
 
 .stopwatch-block{
     position: fixed;
-    top: 20px;
+    top: 10px;
     width: 14%;
     height: 5%;
     align-content: center;
@@ -63,7 +63,7 @@ body {
 
 #game-board{
     position: relative;
-    top: 46px;
+    top: 35px;
     width: 90%;
     height: 85%;
     background: white;
@@ -75,6 +75,15 @@ body {
 #chosen-color{
     display: flex;
     flex-direction: column;
+}
+
+#game-status{
+    position: relative;
+    height: 6%;
+    font-size: 15px;
+    width: 10%;
+    justify-content: space-between;
+    top: 25px;
 }
 
 /* Shadow scheme */

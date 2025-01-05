@@ -12,6 +12,9 @@ let windowHeight
 let colorSelected
 let positionColorSelected
 let timeIsUp
+let countGreenBubblesPopped = 0
+let countRedBubblesPopped = 0
+let countBlueBubblesPopped = 0
 
 window.onload = function(){
     document.querySelector('.stopwatch').innerHTML = '00:00'
@@ -63,6 +66,9 @@ function buildGame(){
         const gameBoardId = "game-board"
         removeClass(gameBoardId, HIDE_ELEMENTS_CLASSNAME)
 
+        const gameStatusId = "game-status"
+        removeClass(gameStatusId, HIDE_ELEMENTS_CLASSNAME)
+
         startStopWatch()
         drawBubbles()
     })
@@ -100,9 +106,9 @@ function drawBubbles(){
         bubbleDiv.style.width = size
         bubbleDiv.style.height = size
 
-        poppingBubble(bubbleDiv)     
-        
         document.getElementById('game-board').appendChild(bubbleDiv)
+
+        poppingBubble(bubbleDiv)   
     }
 }
 
@@ -114,9 +120,26 @@ function getRandomNumber(maxNumberInterval, minNumberInterval){
 
 function poppingBubble(bubbleDiv){
     bubbleDiv.addEventListener("click", () =>{
-        console.log("Click: ", bubbleDiv)
+        const classListNamesOnElement = Object.values(bubbleDiv.classList)
+
+        const red = classListNamesOnElement.filter(name => name.includes("red"))
+        const green = classListNamesOnElement.filter(name => name.includes("green"))
+        const blue = classListNamesOnElement.filter(name => name.includes("blue"))
+
+        countGreenBubblesPopped += green.length > 0 ? 1 : 0
+        countRedBubblesPopped += red.length > 0 ? 1 : 0
+        countBlueBubblesPopped += blue.length > 0 ? 1 : 0
+
+        displayCurrentGameStatus()
+        
         bubbleDiv.remove();
     })
+}
+
+function displayCurrentGameStatus(){
+    document.getElementById("green-bubbles-number").innerText = countGreenBubblesPopped
+    document.getElementById("red-bubbles-number").innerText = countRedBubblesPopped
+    document.getElementById("blue-bubbles-number").innerText = countBlueBubblesPopped
 }
 
 function drawBubbleColor(bubbleDiv, index){
