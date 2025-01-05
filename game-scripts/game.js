@@ -8,8 +8,7 @@ let clockIsTicking = true
 let timerInterval
 let windowWidth
 let windowHeight
-let colorSelected
-
+let colorClassNameSelected
 
 window.onload = function(){
     document.querySelector('.stopwatch').innerHTML = '00:00'
@@ -80,7 +79,7 @@ function drawBubbles(){
         bubbleDiv.style.transform = `translate(${xAxysPx}px, ${yAxysPx}px)`
         
         bubbleDiv.classList.add('bubble')
-        bubbleDiv.classList.add('red-bubble')
+        bubbleDiv.classList.add(`${colorSelected}`)
         bubbleDiv.classList.add('box-shadow')  
 
         const size = getRandomNumber(100, 30)   
@@ -107,7 +106,8 @@ function openDialog(dialog){
         removeClass(chosenColorId, HIDE_ELEMENTS_CLASSNAME)
 
         const bubbleColorChosenId = "buble-color-chosen-random"
-        addClass(bubbleColorChosenId, `${COLORS[getRandomNumber(COLORS.length-1)]}-bubble`)
+        colorSelected = `${COLORS[getRandomNumber(COLORS.length-1)]}-bubble`
+        addClass(bubbleColorChosenId, `${colorSelected}`)
         
         const bubbleElementToDisplayColor = document.getElementById(bubbleColorChosenId)
         bubbleElementToDisplayColor.style.width = 200
@@ -135,5 +135,3 @@ function addClass(id, className){
         element.classList.add(className)
     }
 }
-
-
