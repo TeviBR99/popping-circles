@@ -71,6 +71,7 @@ function buildGame(){
 
         startStopWatch()
         drawBubbles()
+        displayCurrentGameStatus()
     })
 }
 
@@ -131,7 +132,7 @@ function poppingBubble(bubbleDiv){
         countBlueBubblesPopped += blue.length > 0 ? 1 : 0
 
         displayCurrentGameStatus()
-        
+
         bubbleDiv.remove();
     })
 }
