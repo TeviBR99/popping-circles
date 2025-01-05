@@ -15,7 +15,11 @@ window.onload = function(){
     document.querySelector('.stopwatch').innerHTML = '00:00'
     windowWidth = 1200;
     windowHeight = window.innerHeight;
+    settingsParametersToPlay()
+    buildGame()
+}
 
+function settingsParametersToPlay(){
     const ballsSelector = document.getElementById("balls-selector")
     const buttonRemoveAllColors = document.getElementById('button-remove-all-colors')
     const buttonRemoveOneColor = document.getElementById('button-remove-one-color')
@@ -41,7 +45,13 @@ window.onload = function(){
             openDialog(dialog)
         }
     })
+}
 
+function disableEnableButton(button){
+    button.disabled = !button.disabled
+}
+
+function buildGame(){
     document.getElementById('play-button').addEventListener("click", () =>{
         const chosenColorId = "chosen-color"
         addClass(chosenColorId, HIDE_ELEMENTS_CLASSNAME)
@@ -52,10 +62,6 @@ window.onload = function(){
         startStopWatch()
         drawBubbles()
     })
-}
-
-function disableEnableButton(button){
-    button.disabled = !button.disabled
 }
 
 function startStopWatch(){
