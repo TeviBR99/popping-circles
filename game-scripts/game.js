@@ -4,6 +4,7 @@ const TIME_INTERVAL_IN_SECONDS = 1
 
 let ballsToRemove = 0
 let gameMode = ""
+let gameDifficulty = ""
 let clockIsTicking = true
 let timerInterval
 let windowWidth
@@ -113,6 +114,7 @@ function drawBubbleColor(bubbleDiv, index){
     if(gameMode.includes('One')){
         const bubbleColorClassName = index < ballsToRemove/2 ? `${colorSelected}` : `${COLORS[getRandomNumber(COLORS.length-1)]}-bubble`
         bubbleDiv.classList.add(bubbleColorClassName)
+        //If gameDifficult is easy, we use z-index = 1 in the color of colorSelected
     }else{
         bubbleDiv.classList.add(`${colorSelected}`)
     }
