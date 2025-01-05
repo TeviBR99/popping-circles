@@ -10,7 +10,6 @@ let timerInterval
 let windowWidth
 let windowHeight
 let colorSelected
-let positionColorSelected
 let timeIsUp
 let countGreenBubblesPopped = 0
 let countRedBubblesPopped = 0
@@ -132,9 +131,22 @@ function poppingBubble(bubbleDiv){
         countBlueBubblesPopped += blue.length > 0 ? 1 : 0
 
         displayCurrentGameStatus()
-
+        checkGameStatus()
         bubbleDiv.remove();
     })
+}
+
+function checkGameStatus(){
+    let gameFinished = false
+    const totalCount = countGreenBubblesPopped + countRedBubblesPopped + countBlueBubblesPopped
+    gameFinished = colorSelected.includes("green") && countGreenBubblesPopped === ballsToRemove
+    gameFinished = colorSelected.includes("red") && countRedBubblesPopped === ballsToRemove
+    gameFinished = colorSelected.includes("blue") && countBlueBubblesPopped === ballsToRemove
+    gameFinished = !colorSelected.includes("green") && !colorSelected.includes("red") && !colorSelected.includes("blue") && ( totalCount === ballsToRemove)
+
+    if(gameFinished){
+        openDialog(document.getElementById('dialog-game-finished'))
+    }
 }
 
 function displayCurrentGameStatus(){
@@ -158,6 +170,7 @@ function drawBubbleColor(bubbleDiv, index){
 
 function openDialog(dialog){
     dialog.showModal()
+
     document.getElementById('yes-btn').addEventListener("click", () =>{
         const gameOptionsId = "game-options"
         addClass(gameOptionsId, HIDE_ELEMENTS_CLASSNAME)
@@ -179,6 +192,11 @@ function openDialog(dialog){
     })
 
     document.getElementById('go-to-settings-btn').addEventListener("click", () =>{
+        dialog.close()
+    })
+
+    document.getElementById('start-over-btn').addEventListener("click", () =>{
+        window.location.reload()
         dialog.close()
     })
 }
