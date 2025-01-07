@@ -141,19 +141,10 @@ function checkGameStatus(){
     const totalCount = countGreenBubblesPopped + countRedBubblesPopped + countBlueBubblesPopped
     const dialogGameFinished = document.getElementById('dialog-game-finished')
     if(gameMode.includes("One")){
-        if(colorSelected.includes("green") && countGreenBubblesPopped === numberBallsColorSelected){
-            clockIsTicking = false
-            displayFinalResults()
-            openDialog(dialogGameFinished)
-        }
-    
-        if(colorSelected.includes("red") && countRedBubblesPopped === numberBallsColorSelected){
-            clockIsTicking = false
-            displayFinalResults()
-            openDialog(dialogGameFinished)
-        }
-    
-        if(colorSelected.includes("blue") && countBlueBubblesPopped === numberBallsColorSelected){
+        const greenColorCondition = colorSelected.includes("green") && countGreenBubblesPopped === numberBallsColorSelected
+        const redColorCondition = colorSelected.includes("red") && countRedBubblesPopped === numberBallsColorSelected
+        const blueColorCondition = colorSelected.includes("blue") && countBlueBubblesPopped === numberBallsColorSelected
+        if(greenColorCondition || redColorCondition || blueColorCondition){
             clockIsTicking = false
             displayFinalResults()
             openDialog(dialogGameFinished)
